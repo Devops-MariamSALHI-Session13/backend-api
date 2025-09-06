@@ -25,7 +25,7 @@ async function connectDB() {
     //const mongo_uri = "mongodb+srv://hello:z6zh1uoYDogObtYM@cluster0.mq57s.mongodb.net/book-store?authSource=admin"
   // console.log("mongo_uri=",mongo_uri)
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB connected successfully!");
+    console.log("MongoDB is connected successfully!");
   } catch (error) {
     console.error("MongoDB connection error:", error);
     process.exit(1);
@@ -37,7 +37,7 @@ connectDB();
 // Routes
 app.get("/", (req, res) => {
   res.send("Server is running!");
-});
+}); 
 
 app.get("/hello", (req, res) => {
   res.send("Hello Le bon developpeur Community ! 🚀");
