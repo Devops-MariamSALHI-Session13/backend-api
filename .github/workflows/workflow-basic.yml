@@ -12,7 +12,7 @@ jobs:
     run-unit-test-job:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout code
+            - name: clone source code to runner
               uses: actions/checkout@v5
 
    #1 unit test
