@@ -1,0 +1,31 @@
+name: Basic Workflow develop
+
+#trigger
+on:
+    push:
+       branches:
+           - main
+#push on main branch
+
+
+jobs:
+    run-unit-test-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v5
+
+   #1 unit test
+      # - checkout code
+        # - run unit test
+   #2 build docker image and push to dockerhub
+      # - checkout code 
+      # - build docker image
+      # - tag docker image with version
+      # - login to dockerhub
+      # - push docker image
+      
+   #3 deploy to vps
+      # - ssh connection
+      # - pull docker image
+      # - run docker container

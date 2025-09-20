@@ -5,11 +5,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      - /data/db
-      - ./routes:/app/app
+      - mongo-volume:/data/db
+
     networks:
       - mongo-express-network
       - api-network
+
 
   mongo-express:
     image: mongo-express
@@ -24,22 +25,20 @@ services:
       - mongo-express-network
 
   api:
-    image: talel12/api-session13
+    image: api-sessionn13-image
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3001
+      - "3000:3001"
     env_file:
       - .env
     networks:
-    - api-network
+      - api-network
 
 volumes:
-  mongo-volume:
-
+    mongo-volume:
 
 networks:
-  mongo-express-network:
-  api-network:
-
+    mongo-express-network:
+    api-network:
