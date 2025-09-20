@@ -15,6 +15,9 @@ jobs:
             - name: clone source code to runner
               uses: actions/checkout@v5
 
+            - name: run unit test
+              run: npm run test
+
    #1 unit test
       # - checkout code
         # - run unit test
