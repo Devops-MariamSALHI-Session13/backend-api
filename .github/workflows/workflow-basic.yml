@@ -63,7 +63,7 @@ jobs:
               uses: appleboy/ssh-action@v1
               with:
                 host: ${{ secrets.VPS_HOST }}
-                username: linuxserver.io
+                username: user
                 password: ${{ secrets.vps_PASSWORD }}
                 script: whoami 
       # - ssh connection
