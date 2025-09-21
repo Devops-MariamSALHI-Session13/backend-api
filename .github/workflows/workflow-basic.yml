@@ -30,10 +30,21 @@ jobs:
 
             - name: build docker image
               run: docker build -t salhimariam/api-sessionn13 .
+            
+            - name: tag docker image with version
+              run: docker tag salhimariam/api-sessionn13 salhimariam/api-sessionn13:v2
+
             - run: docker images
             
-      # - build docker image
-      # - tag docker image with version
+            - run: echo ${{ vars.DOCKERHUB_USERNAME }}
+            - run: echo ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                    username: ${{ vars.DOCKERHUB_USERNAME }}
+                    password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       # - login to dockerhub
       # - push docker image
       
