@@ -65,6 +65,7 @@ jobs:
                 host: ${{ secrets.VPS_HOST }}
                 username: user
                 password: ${{ secrets.VPS_PASSWORD }}
+                
                 script: whoami 
       # - ssh connection
       # - pull docker image
