@@ -35,7 +35,7 @@ jobs:
               run: docker tag salhimariam/api-sessionn13 salhimariam/api-sessionn13:v2
 
             - run: docker images
-            
+
             - run: echo ${{ vars.DOCKERHUB_USERNAME }}
             - run: echo ${{ secrets.DOCKERHUB_TOKEN }}
 
@@ -45,9 +45,13 @@ jobs:
                     username: ${{ vars.DOCKERHUB_USERNAME }}
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # - login to dockerhub
-      # - push docker image
-      
+            - name: push docker image
+              run: docker push salhimariam/api-sessionn13:v2
+            
+            - name: push docker image with version latest
+              run: docker push salhimariam/api-sessionn13:latest
+                   
+
    #3 deploy to vps
       # - ssh connection
       # - pull docker image
