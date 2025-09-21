@@ -32,7 +32,7 @@ jobs:
               run: docker build -t salhimariam/api-sessionn13 .
             
             - name: tag docker image with version
-              run: docker tag salhimariam/api-sessionn13 salhimariam/api-sessionn13:v2
+              run: docker tag salhimariam/api-sessionn13 salhimariam/api-sessionn13:v${{ github.run_number}}
 
             - run: docker images
 
