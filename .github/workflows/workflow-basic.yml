@@ -5,6 +5,9 @@ on:
     push:
        branches:
            - main
+
+env:
+    DOCKER_IMAGE: ${{ vars.DOCKERHUB_USERNAME }}/api-sessionn13          
 #push on main branch
 
 
@@ -29,10 +32,10 @@ jobs:
               uses: actions/checkout@v5
 
             - name: build docker image
-              run: docker build -t salhimariam/api-sessionn13 .
+              run: docker build -t ${{ env.DOCKER_IMAGE }} .
             
             - name: tag docker image with version
-              run: docker tag salhimariam/api-sessionn13 salhimariam/api-sessionn13:v${{ github.run_number}}
+              run: docker tag ${{ env.DOCKER_IMAGE }} ${{ env.DOCKER_IMAGE }}:v${{ github.run_number}}
 
             - run: docker images
 
@@ -46,13 +49,23 @@ jobs:
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             - name: push docker image
-              run: docker push salhimariam/api-sessionn13:v${{ github.run_number}}
+              run: docker push ${{ env.DOCKER_IMAGE }}:v${{ github.run_number}}
             
             - name: push docker image with version latest
-              run: docker push salhimariam/api-sessionn13:latest
+              run: docker push ${{ env.DOCKER_IMAGE }}:latest
                    
 
-   #3 deploy to vps
+    deploy-to-vps:
+        runs-on: ubuntu-latest
+        needs: build-docker-image-and-push
+        steps:
+            - name: Execute remote SSH commands using password
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.VPS_HOST }}
+                username: linuxserver.io
+                password: ${{ secrets.vps_PASSWORD }}
+                script: whoami 
       # - ssh connection
       # - pull docker image
       # - run docker container
