@@ -46,7 +46,7 @@ jobs:
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             - name: push docker image
-              run: docker push salhimariam/api-sessionn13:v2
+              run: docker push salhimariam/api-sessionn13:v${{ github.run_number}}
             
             - name: push docker image with version latest
               run: docker push salhimariam/api-sessionn13:latest
