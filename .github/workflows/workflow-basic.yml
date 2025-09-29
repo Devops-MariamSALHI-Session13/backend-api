@@ -119,7 +119,7 @@ jobs:
           run: | 
             pwd
             ls
-            docker buildx build -t ${{ env.DOCKER_IMAGE }} ./Dockerfile 
+            docker build -t ${{ env.DOCKER_IMAGE }} .
 
         - name: Run Trivy Docker image vulnerability scan
           run: |
