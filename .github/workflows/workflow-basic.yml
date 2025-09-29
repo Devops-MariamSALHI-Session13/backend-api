@@ -110,14 +110,17 @@ jobs:
             sudo mv trivy /usr/local/bin/
             trivy --version
         
+        # Scan file system
         - name: Run trivy file system vulnerability scan
           run: |
-            trivy fs .
+            trivy fs --exit-code 1 --severity CRITICAL,HIGH .
 
+        # Build image and scan
         - name: Run Trivy Docker image vulnerability scan
           run: |
-            docker buildx build --platform linux/amd64,linux/arm64 -t ${{ env.IMAGE_NAME }} .
-            trivy image ${{ env.IMAGE_NAME }}
+            docker build -t ${{ env.DOCKER_IMAGE }} .
+            trivy image --exit-code 1 --severity CRITICAL ${{ env.DOCKER_IMAGE }}
+
 
 
     build-docker-image-and-push:
