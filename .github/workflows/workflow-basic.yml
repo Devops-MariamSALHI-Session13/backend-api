@@ -116,12 +116,15 @@ jobs:
             trivy fs --exit-code 1 --severity CRITICAL .
 
         - name: Build Docker image
-          run: |  
-            docker build -t ${{ env.DOCKER_IMAGE }} .
+          run: | 
+            pwd
+            ls
+            docker build -t ${{ env.DOCKER_IMAGE }} ./Dockerfile 
 
         - name: Run Trivy Docker image vulnerability scan
           run: |
             trivy image --exit-code 1 --severity CRITICAL ${{ env.DOCKER_IMAGE }}
+
 
 
 
