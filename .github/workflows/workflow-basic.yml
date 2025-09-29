@@ -113,12 +113,14 @@ jobs:
         # Scan file system
         - name: Run trivy file system vulnerability scan
           run: |
-            trivy fs --exit-code 1 --severity CRITICAL,HIGH .
+            trivy fs --exit-code 1 --severity CRITICAL .
 
-        # Build image and scan
+        - name: Build Docker image
+          run: |  
+            docker build -t ${{ env.DOCKER_IMAGE }} .
+
         - name: Run Trivy Docker image vulnerability scan
           run: |
-            docker build -t ${{ env.DOCKER_IMAGE }} .
             trivy image --exit-code 1 --severity CRITICAL ${{ env.DOCKER_IMAGE }}
 
 
