@@ -55,7 +55,7 @@ jobs:
             node-version: '18'
 
         - name: Install Dependency Scanning Tool (Snyk)
-          run: npm install -g snyk
+          run: npm install -g snyk 
 
         - name: Snyk Authentication
           run: snyk auth ${{ secrets.SNYK_TOKEN }}  
